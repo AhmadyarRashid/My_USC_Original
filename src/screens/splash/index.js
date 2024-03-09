@@ -12,7 +12,7 @@ function SplashScreen() {
         index: 0,
         routes: [{name: 'dashboard'}],
       });
-    }, 5000);
+    }, 3500);
     return () => clearTimeout(timeoutId);
   }, [navigation]);
 

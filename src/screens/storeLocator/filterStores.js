@@ -216,7 +216,9 @@ function FilterStoreScreen() {
             <Dropdown
               isLoading={zoneLoading}
               defaultButtonText="Select Zone | زون منتخب کریں"
-              data={zones?.map(item => item?.name ?? '')}
+              data={zones
+                ?.filter(item => item?.short_code !== 'ho')
+                ?.map(item => item?.name ?? '')}
               onSelect={onChangeZone}
             />
             <Dropdown
