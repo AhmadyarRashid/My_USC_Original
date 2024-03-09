@@ -209,29 +209,30 @@ function FilterStoreScreen() {
         </TouchableOpacity>
         <View style={styles.header}>
           <Text style={styles.title}>STORE LOCATOR</Text>
+          <Text style={styles.subTitle}>اسٹور معلوم کریں</Text>
         </View>
         <ScrollView>
           <View style={styles.main}>
             <Dropdown
               isLoading={zoneLoading}
-              defaultButtonText="Select Zone"
+              defaultButtonText="Select Zone | زون منتخب کریں"
               data={zones?.map(item => item?.name ?? '')}
               onSelect={onChangeZone}
             />
             <Dropdown
               isLoading={regionLoading}
-              defaultButtonText="Select Region"
+              defaultButtonText="Select Region | علاقہ منتخب کریں"
               data={regions?.map(item => item?.name)}
               onSelect={onChangeRegion}
             />
             <Dropdown
-              defaultButtonText="Select Category"
+              defaultButtonText="Select Category | قسم منتخب کریں"
               data={Object.values(categoryList)}
               onSelect={selVal => setLocalCategory(selVal)}
             />
             <Dropdown
               isLoading={storeLoading}
-              defaultButtonText="Select Store"
+              defaultButtonText="Select Store | اسٹور کو منتخب کریں"
               data={getStores?.map(item => item?.name ?? '')}
               onSelect={onChangeStore}
             />
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: '8%',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -295,6 +296,11 @@ const styles = StyleSheet.create({
   },
   getDirectionBtnText: {
     color: 'white',
+  },
+  subTitle: {
+    fontSize: 20,
+    color: '#81BB50',
+    marginLeft: 8,
   },
 });
 

@@ -27,8 +27,8 @@ function RegularProductsScreen() {
           />
         </TouchableOpacity>
         <View style={styles.header}>
-          <Text style={styles.title}>REGULAR</Text>
-          <Text style={styles.subTitle}>PRODUCTS</Text>
+          <Text style={styles.title}>REGULAR PRODUCTS</Text>
+          <Text style={styles.subTitle}>دیگر مصنوعات</Text>
         </View>
         {loading && <ActivityIndicator style={styles.loader} />}
         <WebView
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 20,
     color: '#81BB50',
     fontWeight: '900',
     marginLeft: 8,

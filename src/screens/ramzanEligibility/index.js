@@ -27,8 +27,7 @@ function RamazanEligibilityScreen() {
           />
         </TouchableOpacity>
         <View style={styles.header}>
-          <Text style={styles.title}>RAMAZAN</Text>
-          <Text style={styles.subTitle}>ELIGIBILITY</Text>
+          <Text style={styles.title}>RAMAZAN ELIGIBILITY</Text>
         </View>
         {loading && <ActivityIndicator style={styles.loader} />}
         <WebView
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 20,
     color: '#81BB50',
     fontWeight: '900',
     marginLeft: 8,

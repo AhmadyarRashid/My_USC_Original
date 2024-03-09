@@ -28,11 +28,12 @@ function StoreScreen() {
         </TouchableOpacity>
         <View style={styles.header}>
           <Text style={styles.title}>STORE LOCATOR</Text>
+          <Text style={styles.subTitle}>سٹور معلوم کریں</Text>
         </View>
         <TouchableOpacity
           style={styles.filterBtn}
           onPress={() => navigation.navigate('filter-stores')}>
-          <Text style={styles.filterBtnText}>FILTER</Text>
+          <Text style={styles.filterBtnText}>FILTER | فلٹر</Text>
         </TouchableOpacity>
         {loading && <ActivityIndicator style={styles.loader} />}
         <WebView
@@ -69,12 +70,12 @@ const styles = StyleSheet.create({
   header: {
     marginTop: '8%',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 20,
     color: '#81BB50',
     fontWeight: '900',
     marginLeft: 8,
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   filterBtn: {
-    marginTop: '2%',
+    marginTop: '5%',
     width: '60%',
     paddingVertical: 12,
     paddingHorizontal: 22,
@@ -108,6 +109,11 @@ const styles = StyleSheet.create({
   },
   loader: {
     marginTop: '12%',
+  },
+  subTitle: {
+    fontSize: 20,
+    color: '#81BB50',
+    marginLeft: 8,
   },
 });
 
