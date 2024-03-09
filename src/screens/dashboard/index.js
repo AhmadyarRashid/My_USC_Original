@@ -50,6 +50,23 @@ function DashboardScreen() {
                 <Text style={styles.btnSubTitle}>PRODUCTS</Text>
               </View>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate('ramzan-eligibility')}>
+              <Image source={require('./../../assets/productIcon.png')} />
+              <View style={styles.twoLineText}>
+                <Text style={styles.btnTitle}>RAMAZAN</Text>
+                <Text style={styles.btnSubTitle}>ELIGIBILITY</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate('instructions')}>
+              <Image source={require('./../../assets/instructionIcon.png')} />
+              <View style={styles.twoLineText}>
+                <Text style={styles.btnTitle}>INSTRUCTIONS</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </ImageBackground>
