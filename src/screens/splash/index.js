@@ -9,7 +9,10 @@ function SplashScreen() {
           source={require('./../../assets/logo.png')}
           style={styles.logo}
         />
-        <Text style={styles.title}>MY USC</Text>
+        <Image
+          style={styles.title}
+          source={require('./../../assets/my_usc.png')}
+        />
         <Image
           source={require('./../../assets/basket.png')}
           style={styles.shoppingCart}
@@ -36,9 +39,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   title: {
-    color: '#F48323',
-    fontSize: 24,
-    fontWeight: 'bold',
     marginTop: 20,
   },
   shoppingCartContainer: {
