@@ -1,12 +1,101 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
+import {WebView} from 'react-native-webview';
 
 function StoreScreen() {
+  const [loading, setLoading] = useState(true);
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Store Screen</Text>
-    </View>
+    <ImageBackground
+      style={styles.container}
+      source={require('./../../assets/light_background.png')}>
+      <Image
+        style={styles.dashboardIcon}
+        source={require('./../../assets/dashboardIcon.png')}
+      />
+      <View style={styles.header}>
+        <Text style={styles.title}>STORE LOCATOR</Text>
+      </View>
+      <TouchableOpacity style={styles.filterBtn}>
+        <Text style={styles.filterBtnText}>FILTER</Text>
+      </TouchableOpacity>
+      {loading && <ActivityIndicator style={styles.loader} />}
+      <WebView
+        source={{
+          uri: 'https://www.google.com/maps/d/u/0/embed?mid=1Vb9BZU8gR0QsNd8kBWFZn0M9lhk27Xg&ehbc=2E312F&noprof=1',
+        }}
+        onError={err => {
+          setLoading(false);
+          console.log('error ===', err);
+        }}
+        onLoad={res => {
+          setLoading(false);
+          console.log('loaded ===', res);
+        }}
+        style={styles.iframe}
+      />
+    </ImageBackground>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  dashboardIcon: {
+    marginLeft: '10%',
+  },
+  header: {
+    marginTop: '8%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 30,
+    color: '#81BB50',
+    fontWeight: '900',
+    marginLeft: 8,
+  },
+  main: {
+    marginHorizontal: '4%',
+    marginTop: '8%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  filterBtn: {
+    marginTop: '2%',
+    width: '60%',
+    paddingVertical: 12,
+    paddingHorizontal: 22,
+    alignSelf: 'center',
+    borderRadius: 20,
+    backgroundColor: '#81BB50',
+  },
+  filterBtnText: {
+    alignSelf: 'center',
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  iframe: {
+    width: '100%',
+    height: '50%',
+    zIndex: 999,
+    marginTop: '2%',
+  },
+  loader: {
+    marginTop: '12%',
+  },
+});
 
 export default StoreScreen;
