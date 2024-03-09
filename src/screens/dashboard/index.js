@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -21,20 +22,36 @@ function DashboardScreen() {
           <Image source={require('./../../assets/dashboardIcon.png')} />
           <Text style={styles.title}>Dashboard</Text>
         </View>
-        <View style={styles.main}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate('stores')}>
-            <Image source={require('./../../assets/locationIcon.png')} />
-            <Text style={styles.btnTitle}>STORE LOCATOR</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate('products')}>
-            <Image source={require('./../../assets/productIcon.png')} />
-            <Text style={styles.btnTitle}>OUR PRODUCTS</Text>
-          </TouchableOpacity>
-        </View>
+        <ScrollView>
+          <View style={styles.main}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate('stores')}>
+              <Image source={require('./../../assets/locationIcon.png')} />
+              <View style={styles.twoLineText}>
+                <Text style={styles.btnTitle}>STORE LOCATOR</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate('subsidized-products')}>
+              <Image source={require('./../../assets/productIcon.png')} />
+              <View style={styles.twoLineText}>
+                <Text style={styles.btnTitle}>SUBSIDIZED</Text>
+                <Text style={styles.btnSubTitle}>PRODUCTS</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate('regular-products')}>
+              <Image source={require('./../../assets/productIcon.png')} />
+              <View style={styles.twoLineText}>
+                <Text style={styles.btnTitle}>REGULAR</Text>
+                <Text style={styles.btnSubTitle}>PRODUCTS</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -82,7 +99,21 @@ const styles = StyleSheet.create({
   btnTitle: {
     marginLeft: 8,
     color: 'white',
+    alignSelf: 'center',
+    fontWeight: 'bold',
     fontSize: 26,
+  },
+  btnSubTitle: {
+    marginLeft: 8,
+    color: 'white',
+    fontSize: 18,
+    alignSelf: 'center',
+  },
+  twoLineText: {
+    width: '80%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
 });
 

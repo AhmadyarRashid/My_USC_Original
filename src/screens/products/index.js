@@ -70,7 +70,8 @@ function ProductScreen() {
           />
         </TouchableOpacity>
         <View style={styles.header}>
-          <Text style={styles.title}>OUR PRODUCTS</Text>
+          <Text style={styles.title}>SUBSIDIZED</Text>
+          <Text style={styles.subTitle}>PRODUCTS</Text>
         </View>
         <ScrollView>
           <View style={styles.main}>
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: '8%',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -139,6 +140,11 @@ const styles = StyleSheet.create({
   },
   price: {
     alignSelf: 'center',
+  },
+  subTitle: {
+    fontSize: 20,
+    color: '#81BB50',
+    marginLeft: 8,
   },
 });
 

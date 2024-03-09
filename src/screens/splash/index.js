@@ -8,7 +8,10 @@ function SplashScreen() {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      navigation.navigate('dashboard');
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'dashboard'}],
+      });
     }, 5000);
     return () => clearTimeout(timeoutId);
   }, [navigation]);
