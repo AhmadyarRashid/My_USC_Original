@@ -8,6 +8,8 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
 
 const productList = [
   {
@@ -55,41 +57,47 @@ const productList = [
 ];
 
 function ProductScreen() {
+  const navigation = useNavigation();
   return (
-    <ImageBackground
-      style={styles.container}
-      source={require('./../../assets/light_background.png')}>
-      <Image
-        style={styles.dashboardIcon}
-        source={require('./../../assets/dashboardIcon.png')}
-      />
-      <View style={styles.header}>
-        <Text style={styles.title}>OUR PRODUCTS</Text>
-      </View>
-      <ScrollView>
-        <View style={styles.main}>
-          {productList.map(item => (
-            <View key={item.id} style={styles.card}>
-              <Image style={styles.productImg} source={item.image} />
-              <Text style={styles.productName}>{item.name}</Text>
-              <Text style={styles.price}>Rs {item.price}</Text>
-            </View>
-          ))}
-        </View>
-        <TouchableOpacity style={styles.seeMoreBtn}>
-          <Text style={styles.btnText}>Show All</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <ImageBackground
+        style={styles.container}
+        source={require('./../../assets/light_background.png')}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image
+            style={styles.dashboardIcon}
+            source={require('./../../assets/dashboardIcon.png')}
+          />
         </TouchableOpacity>
-      </ScrollView>
-    </ImageBackground>
+        <View style={styles.header}>
+          <Text style={styles.title}>OUR PRODUCTS</Text>
+        </View>
+        <ScrollView>
+          <View style={styles.main}>
+            {productList.map(item => (
+              <View key={item.id} style={styles.card}>
+                <Image style={styles.productImg} source={item.image} />
+                <Text style={styles.productName}>{item.name}</Text>
+                <Text style={styles.price}>Rs {item.price}</Text>
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: 'white',
   },
   dashboardIcon: {
+    marginTop: '4%',
     marginLeft: '10%',
   },
   header: {
@@ -131,17 +139,6 @@ const styles = StyleSheet.create({
   },
   price: {
     alignSelf: 'center',
-  },
-  seeMoreBtn: {
-    marginTop: '2%',
-    paddingVertical: 12,
-    paddingHorizontal: 22,
-    alignSelf: 'center',
-    borderRadius: 20,
-    backgroundColor: '#F48423',
-  },
-  btnText: {
-    color: 'white',
   },
 });
 

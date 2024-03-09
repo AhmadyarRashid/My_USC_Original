@@ -9,48 +9,59 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {WebView} from 'react-native-webview';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
 
 function StoreScreen() {
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
   return (
-    <ImageBackground
-      style={styles.container}
-      source={require('./../../assets/light_background.png')}>
-      <Image
-        style={styles.dashboardIcon}
-        source={require('./../../assets/dashboardIcon.png')}
-      />
-      <View style={styles.header}>
-        <Text style={styles.title}>STORE LOCATOR</Text>
-      </View>
-      <TouchableOpacity style={styles.filterBtn}>
-        <Text style={styles.filterBtnText}>FILTER</Text>
-      </TouchableOpacity>
-      {loading && <ActivityIndicator style={styles.loader} />}
-      <WebView
-        source={{
-          uri: 'https://www.google.com/maps/d/u/0/embed?mid=1Vb9BZU8gR0QsNd8kBWFZn0M9lhk27Xg&ehbc=2E312F&noprof=1',
-        }}
-        onError={err => {
-          setLoading(false);
-          console.log('error ===', err);
-        }}
-        onLoad={res => {
-          setLoading(false);
-          console.log('loaded ===', res);
-        }}
-        style={styles.iframe}
-      />
-    </ImageBackground>
+    <SafeAreaView style={styles.safeArea}>
+      <ImageBackground
+        style={styles.container}
+        source={require('./../../assets/light_background.png')}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image
+            style={styles.dashboardIcon}
+            source={require('./../../assets/dashboardIcon.png')}
+          />
+        </TouchableOpacity>
+        <View style={styles.header}>
+          <Text style={styles.title}>STORE LOCATOR</Text>
+        </View>
+        <TouchableOpacity style={styles.filterBtn}>
+          <Text style={styles.filterBtnText}>FILTER</Text>
+        </TouchableOpacity>
+        {loading && <ActivityIndicator style={styles.loader} />}
+        <WebView
+          source={{
+            uri: 'https://www.google.com/maps/d/u/0/embed?mid=1Vb9BZU8gR0QsNd8kBWFZn0M9lhk27Xg&ehbc=2E312F&noprof=1',
+          }}
+          onError={err => {
+            setLoading(false);
+            console.log('error ===', err);
+          }}
+          onLoad={res => {
+            setLoading(false);
+            console.log('loaded ===', res);
+          }}
+          style={styles.iframe}
+        />
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: 'white',
   },
   dashboardIcon: {
+    marginTop: '4%',
     marginLeft: '10%',
   },
   header: {

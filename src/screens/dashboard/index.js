@@ -7,37 +7,49 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 function DashboardScreen() {
+  const navigation = useNavigation();
   return (
-    <ImageBackground
-      style={styles.container}
-      source={require('./../../assets/background.png')}>
-      <View style={styles.header}>
-        <Image source={require('./../../assets/dashboardIcon.png')} />
-        <Text style={styles.title}>Dashboard</Text>
-      </View>
-      <View style={styles.main}>
-        <TouchableOpacity style={styles.btn}>
-          <Image source={require('./../../assets/locationIcon.png')} />
-          <Text style={styles.btnTitle}>STORE LOCATOR</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Image source={require('./../../assets/productIcon.png')} />
-          <Text style={styles.btnTitle}>OUR PRODUCTS</Text>
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
+    <SafeAreaView style={styles.safeArea}>
+      <ImageBackground
+        style={styles.container}
+        source={require('./../../assets/background.png')}>
+        <View style={styles.header}>
+          <Image source={require('./../../assets/dashboardIcon.png')} />
+          <Text style={styles.title}>Dashboard</Text>
+        </View>
+        <View style={styles.main}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate('stores')}>
+            <Image source={require('./../../assets/locationIcon.png')} />
+            <Text style={styles.btnTitle}>STORE LOCATOR</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate('products')}>
+            <Image source={require('./../../assets/productIcon.png')} />
+            <Text style={styles.btnTitle}>OUR PRODUCTS</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: 'white',
   },
   header: {
-    marginTop: '15%',
+    marginTop: '25%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',

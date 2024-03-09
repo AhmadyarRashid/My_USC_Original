@@ -1,19 +1,11 @@
-import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
-import SplashScreen from './src/screens/splash';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import Navigation from './src/navigation';
 
-function App(): React.JSX.Element {
+export default function App() {
   return (
-    <SafeAreaView>
-      <StatusBar
-        backgroundColor="transparent"
-        translucent
-        barStyle="light-content"
-      />
-      <SplashScreen />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Navigation />
+    </NavigationContainer>
   );
 }
-
-
-export default App;
