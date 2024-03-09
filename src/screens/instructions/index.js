@@ -17,7 +17,7 @@ function InstructionScreen() {
     <SafeAreaView style={styles.safeArea}>
       <ImageBackground
         style={styles.container}
-        source={require('./../../assets/background.png')}>
+        source={require('./../../assets/light_background.png')}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image
             style={styles.dashboardIcon}
@@ -29,7 +29,7 @@ function InstructionScreen() {
         </View>
         <ScrollView>
           <View style={styles.main}>
-            <Text>
+            <Text style={styles.content}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Vestibulum sollicitudin erat ligula, tempus mollis sem sodales
               nec. Nullam ullamcorper efficitur luctus. Vestibulum lobortis sit
@@ -117,6 +117,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  content: {
+    fontSize: 18,
+    color: 'gray',
   },
 });
 
