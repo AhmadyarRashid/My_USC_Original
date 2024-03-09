@@ -23,7 +23,7 @@ function StoreScreen() {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image
             style={styles.dashboardIcon}
-            source={require('./../../assets/dashboardIcon.png')}
+            source={require('./../../assets/back.png')}
           />
         </TouchableOpacity>
         <View style={styles.header}>

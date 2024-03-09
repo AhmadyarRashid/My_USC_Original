@@ -8,13 +8,14 @@ import StoreScreen from '../screens/storeLocator';
 import RegularProductsScreen from '../screens/regularProducts';
 import InstructionsScreen from '../screens/instructions';
 import RamazanEligibilityScreen from '../screens/ramzanEligibility';
+import FilterStoreScreen from '../screens/storeLocator/filterStores';
 
 const Stack = createNativeStackNavigator();
 
 function Navigation() {
   return (
     <Stack.Navigator
-      initialRouteName="dashboard"
+      initialRouteName="splash"
       screenOptions={{
         headerShown: false,
       }}>
@@ -27,6 +28,7 @@ function Navigation() {
         component={RamazanEligibilityScreen}
       />
       <Stack.Screen name="stores" component={StoreScreen} />
+      <Stack.Screen name="filter-stores" component={FilterStoreScreen} />
       <Stack.Screen name="instructions" component={InstructionsScreen} />
     </Stack.Navigator>
   );

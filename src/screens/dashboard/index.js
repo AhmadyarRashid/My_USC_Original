@@ -30,6 +30,7 @@ function DashboardScreen() {
               <Image source={require('./../../assets/locationIcon.png')} />
               <View style={styles.twoLineText}>
                 <Text style={styles.btnTitle}>STORE LOCATOR</Text>
+                <Text style={styles.urduText}>سٹور معلوم کریں</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -37,8 +38,8 @@ function DashboardScreen() {
               onPress={() => navigation.navigate('subsidized-products')}>
               <Image source={require('./../../assets/productIcon.png')} />
               <View style={styles.twoLineText}>
-                <Text style={styles.btnTitle}>SUBSIDIZED</Text>
-                <Text style={styles.btnSubTitle}>PRODUCTS</Text>
+                <Text style={styles.btnTitle}>SUBSIDIZED PRODUCTS</Text>
+                <Text style={styles.urduText}>سبسڈی یافتہ مصنوعات</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -46,8 +47,8 @@ function DashboardScreen() {
               onPress={() => navigation.navigate('regular-products')}>
               <Image source={require('./../../assets/productIcon.png')} />
               <View style={styles.twoLineText}>
-                <Text style={styles.btnTitle}>REGULAR</Text>
-                <Text style={styles.btnSubTitle}>PRODUCTS</Text>
+                <Text style={styles.btnTitle}>OTHER PRODUCTS</Text>
+                <Text style={styles.urduText}>دیگر مصنوعات</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -55,8 +56,8 @@ function DashboardScreen() {
               onPress={() => navigation.navigate('ramzan-eligibility')}>
               <Image source={require('./../../assets/productIcon.png')} />
               <View style={styles.twoLineText}>
-                <Text style={styles.btnTitle}>RAMAZAN</Text>
-                <Text style={styles.btnSubTitle}>ELIGIBILITY</Text>
+                <Text style={styles.btnTitle}>RAMAZAN ELIGIBILITY</Text>
+                <Text style={styles.urduText}>رمضان پیکج کے لیے اہلیت چیک کریں۔</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -64,7 +65,8 @@ function DashboardScreen() {
               onPress={() => navigation.navigate('instructions')}>
               <Image source={require('./../../assets/instructionIcon.png')} />
               <View style={styles.twoLineText}>
-                <Text style={styles.btnTitle}>INSTRUCTIONS</Text>
+                <Text style={styles.btnTitle}>HOW TO USE APP</Text>
+                <Text style={styles.urduText}> ایپ استمال کرنے کا طریقہ</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -118,7 +120,8 @@ const styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center',
     fontWeight: 'bold',
-    fontSize: 26,
+    textAlign: 'center',
+    fontSize: 16,
   },
   btnSubTitle: {
     marginLeft: 8,
@@ -131,6 +134,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  urduText: {
+    fontSize: 16,
+    alignSelf: 'center',
+    textAlign: 'center',
+    color: 'white',
   },
 });
 
