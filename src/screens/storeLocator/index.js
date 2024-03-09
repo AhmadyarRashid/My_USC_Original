@@ -29,7 +29,9 @@ function StoreScreen() {
         <View style={styles.header}>
           <Text style={styles.title}>STORE LOCATOR</Text>
         </View>
-        <TouchableOpacity style={styles.filterBtn}>
+        <TouchableOpacity
+          style={styles.filterBtn}
+          onPress={() => navigation.navigate('filter-stores')}>
           <Text style={styles.filterBtnText}>FILTER</Text>
         </TouchableOpacity>
         {loading && <ActivityIndicator style={styles.loader} />}

@@ -54,7 +54,7 @@ function DashboardScreen() {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => navigation.navigate('ramzan-eligibility')}>
-              <Image source={require('./../../assets/productIcon.png')} />
+              <Image source={require('./../../assets/pmt.png')} />
               <View style={styles.twoLineText}>
                 <Text style={styles.btnTitle}>RAMAZAN ELIGIBILITY</Text>
                 <Text style={styles.urduText}>رمضان پیکج کے لیے اہلیت چیک کریں۔</Text>

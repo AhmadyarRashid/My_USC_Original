@@ -57,10 +57,10 @@ function InstructionScreen() {
               سبسڈی والی مصنوعات کا بٹن دبائیں ۔   4. دیگر مصنوعات کی فہرست کو
               کھولنے کے لیے دیگر مصنوعات کا بٹن دبائیں .
             </Text>
-            <TouchableOpacity style={styles.watchBtn}>
-              <Text style={styles.watchBtnText}>Watch Video Guide</Text>
-              <Text style={styles.watchBtnText}>ویڈیو گائیڈ دیکھیں</Text>
-            </TouchableOpacity>
+            {/*<TouchableOpacity style={styles.watchBtn}>*/}
+            {/*  <Text style={styles.watchBtnText}>Watch Video Guide</Text>*/}
+            {/*  <Text style={styles.watchBtnText}>ویڈیو گائیڈ دیکھیں</Text>*/}
+            {/*</TouchableOpacity>*/}
           </View>
         </ScrollView>
       </ImageBackground>

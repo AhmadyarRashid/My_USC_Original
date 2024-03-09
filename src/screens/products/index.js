@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   ImageBackground,
   StyleSheet,
-  ScrollView,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
+import {WebView} from 'react-native-webview';
 
 const productList = [
   {
@@ -58,6 +59,7 @@ const productList = [
 
 function ProductScreen() {
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(true);
   return (
     <SafeAreaView style={styles.safeArea}>
       <ImageBackground
@@ -73,17 +75,21 @@ function ProductScreen() {
           <Text style={styles.title}>SUBSIDIZED</Text>
           <Text style={styles.subTitle}>PRODUCTS</Text>
         </View>
-        <ScrollView>
-          <View style={styles.main}>
-            {productList.map(item => (
-              <View key={item.id} style={styles.card}>
-                <Image style={styles.productImg} source={item.image} />
-                <Text style={styles.productName}>{item.name}</Text>
-                <Text style={styles.price}>Rs {item.price}</Text>
-              </View>
-            ))}
-          </View>
-        </ScrollView>
+        {loading && <ActivityIndicator style={styles.loader} />}
+        <WebView
+          source={{
+            uri: 'https://usc.org.pk/subsidized-products',
+          }}
+          onError={err => {
+            setLoading(false);
+            console.log('error ===', err);
+          }}
+          onLoad={res => {
+            setLoading(false);
+            console.log('loaded ===', res);
+          }}
+          style={styles.iframe}
+        />
       </ImageBackground>
     </SafeAreaView>
   );
@@ -137,6 +143,9 @@ const styles = StyleSheet.create({
     marginTop: 4,
     alignSelf: 'center',
     fontWeight: 'bold',
+  },
+  loader: {
+    marginTop: '12%',
   },
   price: {
     alignSelf: 'center',
