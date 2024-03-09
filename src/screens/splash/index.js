@@ -1,9 +1,11 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, ImageBackground} from 'react-native';
 
 function SplashScreen() {
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      style={styles.container}
+      source={require('./../../assets/background.png')}>
       <View style={styles.logoContainer}>
         <Image
           source={require('./../../assets/logo.png')}
@@ -18,7 +20,7 @@ function SplashScreen() {
           style={styles.shoppingCart}
         />
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
