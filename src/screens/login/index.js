@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   guide: {
     color: '#017D03',
-    fontWeight: 100,
+    fontWeight: '100',
     fontSize: 14,
   },
   main: {
