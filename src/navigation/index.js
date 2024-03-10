@@ -9,6 +9,7 @@ import RegularProductsScreen from '../screens/regularProducts';
 import InstructionsScreen from '../screens/instructions';
 import RamazanEligibilityScreen from '../screens/ramzanEligibility';
 import FilterStoreScreen from '../screens/storeLocator/filterStores';
+import SalesReportScreen from '../screens/salesReport';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ function Navigation() {
       />
       <Stack.Screen name="stores" component={StoreScreen} />
       <Stack.Screen name="filter-stores" component={FilterStoreScreen} />
+      <Stack.Screen name="reports" component={SalesReportScreen} />
       <Stack.Screen name="instructions" component={InstructionsScreen} />
     </Stack.Navigator>
   );

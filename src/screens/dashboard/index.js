@@ -45,7 +45,7 @@ function DashboardScreen() {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => navigation.navigate('regular-products')}>
-              <Image source={require('./../../assets/productIcon.png')} />
+              <Image source={require('./../../assets/other_products.png')} />
               <View style={styles.twoLineText}>
                 <Text style={styles.btnTitle}>OTHER PRODUCTS</Text>
                 <Text style={styles.urduText}>دیگر مصنوعات</Text>
@@ -58,6 +58,15 @@ function DashboardScreen() {
               <View style={styles.twoLineText}>
                 <Text style={styles.btnTitle}>RAMAZAN ELIGIBILITY</Text>
                 <Text style={styles.urduText}>رمضان پیکج کی اہلیت چیک کریں</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate('reports')}>
+              <Image source={require('./../../assets/reportIcon.png')} />
+              <View style={styles.twoLineText}>
+                <Text style={styles.btnTitle}>SALES REPORT</Text>
+                <Text style={styles.urduText}>فروخت کی رپورٹ</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
