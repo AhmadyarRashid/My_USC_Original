@@ -3,16 +3,16 @@ import {
   View,
   Text,
   ImageBackground,
-  StyleSheet,
   Image,
   TouchableOpacity,
+  StyleSheet,
   ActivityIndicator,
 } from 'react-native';
+import {WebView} from 'react-native-webview';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
-import {WebView} from 'react-native-webview';
 
-function ProductScreen() {
+function SalesReportScreen() {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
 
@@ -43,8 +43,7 @@ function ProductScreen() {
           />
         </TouchableOpacity>
         <View style={styles.header}>
-          <Text style={styles.title}>SUBSIDIZED PRODUCTS</Text>
-          <Text style={styles.subTitle}>سبسڈی یافتہ مصنوعات</Text>
+          <Text style={styles.title}>SALES REPORT</Text>
         </View>
         {loading && (
           <View style={styles.loaderContainer}>
@@ -52,10 +51,11 @@ function ProductScreen() {
           </View>
         )}
         <WebView
-          injectedJavaScriptBeforeContentLoaded={injectedJS}
           source={{
-            uri: 'https://usc.org.pk/subsidized-products',
+            uri: 'https://usc.org.pk/sales-report/dashboard',
           }}
+          javaScriptEnabled={true}
+          injectedJavaScriptBeforeContentLoaded={injectedJS}
           onError={err => {
             setTimeout(() => {
               setLoading(false);
@@ -68,7 +68,6 @@ function ProductScreen() {
             }, 1000);
             console.log('loaded ===', res);
           }}
-          javaScriptEnabled={true}
           style={[
             styles.iframe,
             {
@@ -108,27 +107,30 @@ const styles = StyleSheet.create({
   },
   main: {
     marginHorizontal: '4%',
-    marginTop: '20%',
+    marginTop: '8%',
     display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
-  card: {
-    marginBottom: 8,
-    padding: 12,
-    width: '42%',
-    borderColor: '#81BB50',
-    borderWidth: 2,
+  filterBtn: {
+    marginTop: '2%',
+    width: '60%',
+    paddingVertical: 12,
+    paddingHorizontal: 22,
+    alignSelf: 'center',
     borderRadius: 20,
+    backgroundColor: '#81BB50',
   },
-  productImg: {
+  filterBtnText: {
     alignSelf: 'center',
-  },
-  productName: {
-    marginTop: 4,
-    alignSelf: 'center',
+    color: 'white',
     fontWeight: 'bold',
+  },
+  iframe: {
+    width: '100%',
+    height: '50%',
+    zIndex: 999,
+    marginTop: '2%',
   },
   loaderContainer: {
     height: 800,
@@ -138,9 +140,6 @@ const styles = StyleSheet.create({
   loader: {
     marginTop: '12%',
   },
-  price: {
-    alignSelf: 'center',
-  },
   subTitle: {
     fontSize: 20,
     color: '#81BB50',
@@ -148,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductScreen;
+export default SalesReportScreen;

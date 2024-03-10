@@ -21,8 +21,10 @@ function RegularProductsScreen() {
     const hideElements = () => {
       const footer = document.getElementsByTagName("footer")[0];
       const nav = document.getElementsByTagName("nav")[0];
+      const header = document.getElementsByTagName("header")[0];
       if (footer) footer.style.display = "none";
       if (nav) nav.style.display = "none";
+      if (header) header.style.display = "none";
     };
     hideElements();
   }, 100); // Adjust the timeout as necessary
@@ -67,7 +69,12 @@ function RegularProductsScreen() {
             }, 1000);
             console.log('loaded ===', res);
           }}
-          style={styles.iframe}
+          style={[
+            styles.iframe,
+            {
+              visibility: loading ? 'hidden' : 'show',
+            },
+          ]}
         />
       </ImageBackground>
     </SafeAreaView>
