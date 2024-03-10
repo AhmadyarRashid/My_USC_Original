@@ -1,10 +1,18 @@
-import React, {useEffect} from 'react';
-import {View, Image, StyleSheet, ImageBackground} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {
+  View,
+  Image,
+  StyleSheet,
+  ImageBackground,
+  Animated,
+  Dimensions,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 
 function SplashScreen() {
   const navigation = useNavigation();
+  const moveAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -15,6 +23,22 @@ function SplashScreen() {
     }, 3500);
     return () => clearTimeout(timeoutId);
   }, [navigation]);
+
+  useEffect(() => {
+    // Get screen width
+    const {width} = Dimensions.get('window');
+
+    // Calculate the target X position to center the image
+    // Assuming the image width is 100, adjust this based on your actual image width for accurate centering
+    const toValue = width / 2 - 120;
+
+    // Start the animation
+    Animated.timing(moveAnimation, {
+      toValue,
+      duration: 3000,
+      useNativeDriver: true, // Use the native driver for better performance
+    }).start();
+  }, [moveAnimation]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -30,11 +54,16 @@ function SplashScreen() {
             style={styles.title}
             source={require('./../../assets/my_usc.png')}
           />
-          <Image
-            source={require('./../../assets/basket.png')}
-            style={styles.shoppingCart}
-          />
         </View>
+        <Animated.Image
+          source={require('./../../assets/basket.png')}
+          style={[
+            styles.shoppingCart,
+            {
+              transform: [{translateX: moveAnimation}],
+            },
+          ]}
+        />
       </ImageBackground>
     </SafeAreaView>
   );
@@ -47,7 +76,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   logoContainer: {
