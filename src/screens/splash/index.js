@@ -18,7 +18,7 @@ function SplashScreen() {
     const timeoutId = setTimeout(() => {
       navigation.reset({
         index: 0,
-        routes: [{name: 'dashboard'}],
+        routes: [{name: 'login'}],
       });
     }, 3500);
     return () => clearTimeout(timeoutId);

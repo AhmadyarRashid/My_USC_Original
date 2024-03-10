@@ -60,15 +60,15 @@ function DashboardScreen() {
                 <Text style={styles.urduText}>رمضان پیکج کی اہلیت چیک کریں</Text>
               </View>
             </TouchableOpacity>
-            {/*<TouchableOpacity*/}
-            {/*  style={styles.btn}*/}
-            {/*  onPress={() => navigation.navigate('reports')}>*/}
-            {/*  <Image source={require('./../../assets/reportIcon.png')} />*/}
-            {/*  <View style={styles.twoLineText}>*/}
-            {/*    <Text style={styles.btnTitle}>SALES REPORT</Text>*/}
-            {/*    <Text style={styles.urduText}>فروخت کی رپورٹ</Text>*/}
-            {/*  </View>*/}
-            {/*</TouchableOpacity>*/}
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate('reports')}>
+              <Image source={require('./../../assets/reportIcon.png')} />
+              <View style={styles.twoLineText}>
+                <Text style={styles.btnTitle}>SALES REPORT</Text>
+                <Text style={styles.urduText}>فروخت کی رپورٹ</Text>
+              </View>
+            </TouchableOpacity>
             <TouchableOpacity
               style={styles.btn}
               onPress={() => navigation.navigate('instructions')}>

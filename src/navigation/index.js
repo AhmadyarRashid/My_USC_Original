@@ -11,6 +11,7 @@ import RamazanEligibilityScreen from '../screens/ramzanEligibility';
 import FilterStoreScreen from '../screens/storeLocator/filterStores';
 import SalesReportScreen from '../screens/salesReport';
 import VideoPlayerScreen from '../screens/videoPlayer';
+import LoginScreen from '../screens/login';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ function Navigation() {
         headerShown: false,
       }}>
       <Stack.Screen name="splash" component={SplashScreen} />
+      <Stack.Screen name="login" component={LoginScreen} />
       <Stack.Screen name="dashboard" component={DashboardScreen} />
       <Stack.Screen name="subsidized-products" component={ProductScreen} />
       <Stack.Screen name="regular-products" component={RegularProductsScreen} />
