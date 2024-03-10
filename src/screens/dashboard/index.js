@@ -30,7 +30,7 @@ function DashboardScreen() {
               <Image source={require('./../../assets/locationIcon.png')} />
               <View style={styles.twoLineText}>
                 <Text style={styles.btnTitle}>STORE LOCATOR</Text>
-                <Text style={styles.urduText}>سٹور معلوم کریں</Text>
+                <Text style={styles.urduText}>سٹور کی جگہ معلوم کریں</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity

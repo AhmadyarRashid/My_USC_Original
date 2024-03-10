@@ -108,17 +108,7 @@ function FilterStoreScreen() {
         const res = response.data;
         const {isSuccess, payload, message} = res;
         if (isSuccess) {
-          const list = payload?.map(
-            ({id, name, code, address, latitude, longitude}) => ({
-              id,
-              name: `${name}-${code}`,
-              code,
-              address,
-              latitude,
-              longitude,
-            }),
-          );
-          setStores(list);
+          setStores(payload);
         } else {
           // toast.show({
           //   title: message || 'Oops, Something went wrong.',
@@ -219,7 +209,7 @@ function FilterStoreScreen() {
         </TouchableOpacity>
         <View style={styles.header}>
           <Text style={styles.title}>STORE LOCATOR</Text>
-          <Text style={styles.subTitle}>اسٹور معلوم کریں</Text>
+          <Text style={styles.subTitle}>سٹور کی جگہ معلوم کریں</Text>
         </View>
         <ScrollView>
           <View style={styles.main}>
