@@ -22,6 +22,7 @@ const categoryList = {
   all: 'All',
   regular: 'Regular',
   sale_point: 'Sale Point',
+  franchise: 'Franchise',
   mobile: 'Mobile',
 };
 
@@ -108,17 +109,7 @@ function FilterStoreScreen() {
         const res = response.data;
         const {isSuccess, payload, message} = res;
         if (isSuccess) {
-          const list = payload?.map(
-            ({id, name, code, address, latitude, longitude}) => ({
-              id,
-              name: `${name}-${code}`,
-              code,
-              address,
-              latitude,
-              longitude,
-            }),
-          );
-          setStores(list);
+          setStores(payload);
         } else {
           // toast.show({
           //   title: message || 'Oops, Something went wrong.',
@@ -176,12 +167,15 @@ function FilterStoreScreen() {
       return stores?.filter(item => item?.category === 'mobile store') ?? [];
     } else if (categoryList?.sale_point === localCategory) {
       return stores?.filter(item => item?.category === 'sale_point') ?? [];
+    } else if (categoryList?.franchise === localCategory) {
+      return stores?.filter(item => item?.category === 'franchise') ?? [];
     } else {
       return (
         stores?.filter(
           item =>
             item?.category !== 'mobile store' ||
-            item?.category !== 'sale_point',
+            item?.category !== 'sale_point' ||
+            item?.category !== 'franchise',
         ) ?? []
       );
     }
@@ -219,7 +213,7 @@ function FilterStoreScreen() {
         </TouchableOpacity>
         <View style={styles.header}>
           <Text style={styles.title}>STORE LOCATOR</Text>
-          <Text style={styles.subTitle}>اسٹور معلوم کریں</Text>
+          <Text style={styles.subTitle}>سٹور کی جگہ معلوم کریں</Text>
         </View>
         <ScrollView>
           <View style={styles.main}>

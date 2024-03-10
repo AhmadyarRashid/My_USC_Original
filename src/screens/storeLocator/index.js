@@ -28,7 +28,7 @@ function StoreScreen() {
         </TouchableOpacity>
         <View style={styles.header}>
           <Text style={styles.title}>STORE LOCATOR</Text>
-          <Text style={styles.subTitle}>سٹور معلوم کریں</Text>
+          <Text style={styles.subTitle}>سٹور کی جگہ معلوم کریں</Text>
         </View>
         <TouchableOpacity
           style={styles.filterBtn}
