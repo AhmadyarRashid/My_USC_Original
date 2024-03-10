@@ -271,6 +271,11 @@ function FilterStoreScreen() {
                     {getSelectedStore?.timing ?? ''}
                   </Text>
                 )}
+                <Text style={styles.storeDetailInfo}>
+                  <Text style={styles.storeDetailTitle}>Store Information:</Text>
+                  {'\n'}
+                  {getSelectedStore?.name ?? ''}, {getSelectedStore?.address}
+                </Text>
               </View>
             )}
 

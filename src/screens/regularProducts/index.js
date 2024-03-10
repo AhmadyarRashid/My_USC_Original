@@ -15,6 +15,20 @@ import {useNavigation} from '@react-navigation/native';
 function RegularProductsScreen() {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
+
+  const injectedJS = `
+  setTimeout(function() {
+    const hideElements = () => {
+      const footer = document.getElementsByTagName("footer")[0];
+      const nav = document.getElementsByTagName("nav")[0];
+      if (footer) footer.style.display = "none";
+      if (nav) nav.style.display = "none";
+    };
+    hideElements();
+  }, 100); // Adjust the timeout as necessary
+  true; // note: this is required, or you'll sometimes get an undefined error
+`;
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ImageBackground
@@ -30,17 +44,27 @@ function RegularProductsScreen() {
           <Text style={styles.title}>REGULAR PRODUCTS</Text>
           <Text style={styles.subTitle}>دیگر مصنوعات</Text>
         </View>
-        {loading && <ActivityIndicator style={styles.loader} />}
+        {loading && (
+          <View style={styles.loaderContainer}>
+            <ActivityIndicator style={styles.loader} />
+          </View>
+        )}
         <WebView
           source={{
             uri: 'https://usc.org.pk/uscproducts',
           }}
+          javaScriptEnabled={true}
+          injectedJavaScriptBeforeContentLoaded={injectedJS}
           onError={err => {
-            setLoading(false);
+            setTimeout(() => {
+              setLoading(false);
+            }, 1000);
             console.log('error ===', err);
           }}
           onLoad={res => {
-            setLoading(false);
+            setTimeout(() => {
+              setLoading(false);
+            }, 1000);
             console.log('loaded ===', res);
           }}
           style={styles.iframe}
@@ -101,6 +125,11 @@ const styles = StyleSheet.create({
     height: '50%',
     zIndex: 999,
     marginTop: '2%',
+  },
+  loaderContainer: {
+    height: 800,
+    width: '100%',
+    backgroundColor: 'white',
   },
   loader: {
     marginTop: '12%',

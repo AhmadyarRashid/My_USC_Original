@@ -12,54 +12,23 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {WebView} from 'react-native-webview';
 
-const productList = [
-  {
-    id: 1,
-    image: require('../../assets/products/atta.png'),
-    name: 'Tota Rice',
-    price: 120,
-  },
-  {
-    id: 2,
-    image: require('../../assets/products/atta.png'),
-    name: 'Basmati Rice',
-    price: 128,
-  },
-  {
-    id: 3,
-    image: require('../../assets/products/atta.png'),
-    name: 'Sila Rice',
-    price: 340,
-  },
-  {
-    id: 4,
-    image: require('../../assets/products/atta.png'),
-    name: 'Dates',
-    price: 800,
-  },
-  {
-    id: 5,
-    image: require('../../assets/products/atta.png'),
-    name: 'White Channa',
-    price: 380,
-  },
-  {
-    id: 6,
-    image: require('../../assets/products/atta.png'),
-    name: 'Basin',
-    price: 150,
-  },
-  {
-    id: 7,
-    image: require('../../assets/products/atta.png'),
-    name: 'Tea',
-    price: 220,
-  },
-];
-
 function ProductScreen() {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
+
+  const injectedJS = `
+  setTimeout(function() {
+    const hideElements = () => {
+      const footer = document.getElementsByTagName("footer")[0];
+      const nav = document.getElementsByTagName("nav")[0];
+      if (footer) footer.style.display = "none";
+      if (nav) nav.style.display = "none";
+    };
+    hideElements();
+  }, 100); // Adjust the timeout as necessary
+  true; // note: this is required, or you'll sometimes get an undefined error
+`;
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ImageBackground
@@ -75,20 +44,35 @@ function ProductScreen() {
           <Text style={styles.title}>SUBSIDIZED PRODUCTS</Text>
           <Text style={styles.subTitle}>سبسڈی یافتہ مصنوعات</Text>
         </View>
-        {loading && <ActivityIndicator style={styles.loader} />}
+        {loading && (
+          <View style={styles.loaderContainer}>
+            <ActivityIndicator style={styles.loader} />
+          </View>
+        )}
         <WebView
+          injectedJavaScriptBeforeContentLoaded={injectedJS}
           source={{
             uri: 'https://usc.org.pk/subsidized-products',
           }}
           onError={err => {
-            setLoading(false);
+            setTimeout(() => {
+              setLoading(false);
+            }, 1000);
             console.log('error ===', err);
           }}
           onLoad={res => {
-            setLoading(false);
+            setTimeout(() => {
+              setLoading(false);
+            }, 1000);
             console.log('loaded ===', res);
           }}
-          style={styles.iframe}
+          javaScriptEnabled={true}
+          style={[
+            styles.iframe,
+            {
+              visibility: loading ? 'hidden' : 'show',
+            },
+          ]}
         />
       </ImageBackground>
     </SafeAreaView>
@@ -143,6 +127,11 @@ const styles = StyleSheet.create({
     marginTop: 4,
     alignSelf: 'center',
     fontWeight: 'bold',
+  },
+  loaderContainer: {
+    height: 800,
+    width: '100%',
+    backgroundColor: 'white',
   },
   loader: {
     marginTop: '12%',
