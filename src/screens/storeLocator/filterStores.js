@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
   View,
   Text,
@@ -177,24 +177,34 @@ function FilterStoreScreen() {
     } else if (categoryList?.sale_point === localCategory) {
       return stores?.filter(item => item?.category === 'sale_point') ?? [];
     } else {
-      return stores?.filter(item => item?.category !== 'mobile store') ?? [];
+      return (
+        stores?.filter(
+          item =>
+            item?.category !== 'mobile store' ||
+            item?.category !== 'sale_point',
+        ) ?? []
+      );
     }
   }, [localCategory, stores]);
 
+  const getSelectedStore = useMemo(
+    () => stores?.find(item => item.id === localStoreId),
+    [localStoreId, stores],
+  );
+
   const getDirectionHandler = useCallback(async () => {
-    const selectedStore = stores?.find(item => item.id === localStoreId);
     if (
-      selectedStore &&
-      selectedStore?.latitude === 0 &&
-      selectedStore?.longitude === 0
+      getSelectedStore &&
+      getSelectedStore?.latitude === 0 &&
+      getSelectedStore?.longitude === 0
     ) {
       alert('Location not found');
     } else {
       await Linking.openURL(
-        `https://maps.google.com/maps?q=${selectedStore?.latitude},${selectedStore?.longitude}`,
+        `https://maps.google.com/maps?q=${getSelectedStore?.latitude},${getSelectedStore?.longitude}`,
       );
     }
-  }, [localStoreId, stores]);
+  }, [getSelectedStore]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -238,6 +248,31 @@ function FilterStoreScreen() {
               data={getStores?.map(item => item?.name ?? '')}
               onSelect={onChangeStore}
             />
+            {getSelectedStore && (
+              <View style={styles.storeDetail}>
+                {getSelectedStore?.incharge_name && (
+                  <Text style={styles.storeDetailInfo}>
+                    <Text style={styles.storeDetailTitle}>Contact Person:</Text>
+                    {'\n'}
+                    {getSelectedStore?.incharge_name ?? ''}
+                  </Text>
+                )}
+                {getSelectedStore?.incharge_phone && (
+                  <Text style={styles.storeDetailInfo}>
+                    <Text style={styles.storeDetailTitle}>Contact Number:</Text>
+                    {'\n'}
+                    {getSelectedStore?.incharge_phone ?? ''}
+                  </Text>
+                )}
+                {getSelectedStore?.timing && (
+                  <Text style={styles.storeDetailInfo}>
+                    <Text style={styles.storeDetailTitle}>Store Timing:</Text>
+                    {'\n'}
+                    {getSelectedStore?.timing ?? ''}
+                  </Text>
+                )}
+              </View>
+            )}
 
             <TouchableOpacity
               style={styles.getDirectionBtn}
@@ -303,6 +338,25 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#81BB50',
     marginLeft: 8,
+  },
+  storeDetail: {
+    marginTop: '5%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  storeDetailTitle: {
+    textAlign: 'center',
+    color: '#F48423',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  storeDetailInfo: {
+    marginTop: 8,
+    textAlign: 'center',
+    color: 'gray',
+    fontSize: 18,
   },
 });
 

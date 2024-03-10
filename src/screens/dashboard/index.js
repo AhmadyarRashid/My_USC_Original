@@ -57,7 +57,7 @@ function DashboardScreen() {
               <Image source={require('./../../assets/pmt.png')} />
               <View style={styles.twoLineText}>
                 <Text style={styles.btnTitle}>RAMAZAN ELIGIBILITY</Text>
-                <Text style={styles.urduText}>رمضان پیکج کے لیے اہلیت چیک کریں۔</Text>
+                <Text style={styles.urduText}>رمضان پیکج کی اہلیت چیک کریں</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
