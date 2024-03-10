@@ -22,6 +22,7 @@ const categoryList = {
   all: 'All',
   regular: 'Regular',
   sale_point: 'Sale Point',
+  franchise: 'Franchise',
   mobile: 'Mobile',
 };
 
@@ -166,12 +167,15 @@ function FilterStoreScreen() {
       return stores?.filter(item => item?.category === 'mobile store') ?? [];
     } else if (categoryList?.sale_point === localCategory) {
       return stores?.filter(item => item?.category === 'sale_point') ?? [];
+    } else if (categoryList?.franchise === localCategory) {
+      return stores?.filter(item => item?.category === 'franchise') ?? [];
     } else {
       return (
         stores?.filter(
           item =>
             item?.category !== 'mobile store' ||
-            item?.category !== 'sale_point',
+            item?.category !== 'sale_point' ||
+            item?.category !== 'franchise',
         ) ?? []
       );
     }
