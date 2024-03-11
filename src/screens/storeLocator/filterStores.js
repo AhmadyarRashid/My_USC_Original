@@ -21,9 +21,7 @@ const userId = 2;
 const categoryList = {
   all: 'All',
   regular: 'Regular',
-  sale_point: 'Sale Point',
-  franchise: 'Franchise',
-  mobile: 'Mobile',
+  mobile: 'Mobile & Static store',
 };
 
 function FilterStoreScreen() {
@@ -161,23 +159,24 @@ function FilterStoreScreen() {
   );
 
   const getStores = useMemo(() => {
-    if (categoryList.all === localCategory) {
-      return stores || [];
-    } else if (categoryList.mobile === localCategory) {
-      return stores?.filter(item => item?.category === 'mobile store') ?? [];
-    } else if (categoryList?.sale_point === localCategory) {
-      return stores?.filter(item => item?.category === 'sale_point') ?? [];
-    } else if (categoryList?.franchise === localCategory) {
-      return stores?.filter(item => item?.category === 'franchise') ?? [];
-    } else {
+    if (categoryList.regular === localCategory) {
       return (
         stores?.filter(
           item =>
             item?.category !== 'mobile store' ||
-            item?.category !== 'sale_point' ||
-            item?.category !== 'franchise',
+            item?.category !== 'sale_point',
         ) ?? []
       );
+    } else if (categoryList.mobile === localCategory) {
+      return (
+        stores?.filter(
+          item =>
+            item?.category === 'mobile store' ||
+            item?.category === 'sale_point',
+        ) ?? []
+      );
+    } else {
+      return stores || [];
     }
   }, [localCategory, stores]);
 
