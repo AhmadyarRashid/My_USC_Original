@@ -36,12 +36,15 @@ function SalesReportScreen() {
       <ImageBackground
         style={styles.container}
         source={require('./../../assets/light_background.png')}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image
-            style={styles.dashboardIcon}
-            source={require('./../../assets/back.png')}
-          />
-        </TouchableOpacity>
+        <View style={styles.controlHeader}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              style={styles.dashboardIcon}
+              source={require('./../../assets/back.png')}
+            />
+          </TouchableOpacity>
+          <Image source={require('./../../assets/logo_plan.png')} />
+        </View>
         <View style={styles.header}>
           <Text style={styles.title}>SALES REPORT</Text>
         </View>
@@ -87,6 +90,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  controlHeader: {
+    marginTop: '5%',
+    marginHorizontal: '8%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   dashboardIcon: {
     marginTop: '4%',

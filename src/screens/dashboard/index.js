@@ -19,8 +19,11 @@ function DashboardScreen() {
         style={styles.container}
         source={require('./../../assets/background.png')}>
         <View style={styles.header}>
-          <Image source={require('./../../assets/dashboardIcon.png')} />
-          <Text style={styles.title}>Dashboard</Text>
+          <Image source={require('./../../assets/logo_plan.png')} />
+          <View style={styles.dashboardHeader}>
+            <Image source={require('./../../assets/dashboardIcon.png')} />
+            <Text style={styles.title}>Dashboard</Text>
+          </View>
         </View>
         <ScrollView>
           <View style={styles.main}>
@@ -94,7 +97,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   header: {
-    marginTop: '25%',
+    marginTop: '15%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dashboardHeader: {
+    marginTop: '2%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
