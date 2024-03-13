@@ -11,6 +11,7 @@ import RamazanEligibilityScreen from '../screens/ramzanEligibility';
 import FilterStoreScreen from '../screens/storeLocator/filterStores';
 import SalesReportScreen from '../screens/salesReport';
 import VideoPlayerScreen from '../screens/videoPlayer';
+import FilterProvinceStoreScreen from '../screens/storeLocator/filterProvince';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,10 @@ function Navigation() {
       />
       <Stack.Screen name="stores" component={StoreScreen} />
       <Stack.Screen name="filter-stores" component={FilterStoreScreen} />
+      <Stack.Screen
+        name="filter-province-stores"
+        component={FilterProvinceStoreScreen}
+      />
       <Stack.Screen name="reports" component={SalesReportScreen} />
       <Stack.Screen name="video" component={VideoPlayerScreen} />
       <Stack.Screen name="instructions" component={InstructionsScreen} />

@@ -36,7 +36,16 @@ function StoreScreen() {
         <TouchableOpacity
           style={styles.filterBtn}
           onPress={() => navigation.navigate('filter-stores')}>
-          <Text style={styles.filterBtnText}>FILTER | فلٹر</Text>
+          <Text style={styles.filterBtnText}>
+            FILTER By Zone & Region | فلٹر
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.filterBtn}
+          onPress={() => navigation.navigate('filter-province-stores')}>
+          <Text style={styles.filterBtnText}>
+            FILTER By Province & District | فلٹر
+          </Text>
         </TouchableOpacity>
         {loading && <ActivityIndicator style={styles.loader} />}
         <WebView
@@ -99,8 +108,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   filterBtn: {
-    marginTop: '5%',
-    width: '60%',
+    marginTop: '3%',
+    width: '90%',
     paddingVertical: 12,
     paddingHorizontal: 22,
     alignSelf: 'center',
