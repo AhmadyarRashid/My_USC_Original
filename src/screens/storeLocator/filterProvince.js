@@ -16,7 +16,6 @@ import axios from 'axios';
 import Dropdown from '../../shared/dropdown';
 
 const serverUrl = 'https://fm.uscpak.com/api/v1';
-const userId = 2;
 
 const categoryList = {
   all: 'All',
@@ -43,7 +42,7 @@ function FilterProvinceStoreScreen() {
   const getUserZones = useCallback(() => {
     setZoneLoading(true);
     axios
-      .get(`${serverUrl}/usc/user/zone?user_id=${userId}`)
+      .get(`${serverUrl}/usc/list/province`)
       .then(response => {
         setZoneLoading(false);
         const res = response.data;
@@ -70,9 +69,7 @@ function FilterProvinceStoreScreen() {
   const getUserRegions = useCallback(() => {
     setRegionLoading(true);
     axios
-      .get(
-        `${serverUrl}/usc/user/region?user_id=${userId}&zone_id=${localZoneId}`,
-      )
+      .get(`${serverUrl}/usc/province/districts?id=${localZoneId}`)
       .then(response => {
         setRegionLoading(false);
         const res = response.data;
@@ -98,7 +95,7 @@ function FilterProvinceStoreScreen() {
 
   const getUserStores = useCallback(() => {
     setStoreLoading(true);
-    let url = `${serverUrl}/usc/region/stores?user_id=${userId}&region_id=${localRegionId}`;
+    let url = `${serverUrl}/usc/dist/stores?district_id=${localRegionId}`;
 
     axios
       .get(url)
@@ -282,20 +279,20 @@ function FilterProvinceStoreScreen() {
                 </Text>
               </View>
             )}
-
-            <TouchableOpacity
-              style={styles.getDirectionBtn}
-              onPress={() => getDirectionHandler()}>
-              <Text style={styles.getDirectionBtnText}>Get Direction</Text>
-            </TouchableOpacity>
-
-            {stores.length > 0 && (
+            <View style={styles.controlBtnView}>
+              {stores.length > 0 && (
+                <TouchableOpacity
+                  style={styles.getDirectionBtn}
+                  onPress={goToViewOnMap}>
+                  <Text style={styles.getDirectionBtnText}>View on Map</Text>
+                </TouchableOpacity>
+              )}
               <TouchableOpacity
                 style={styles.getDirectionBtn}
-                onPress={goToViewOnMap}>
-                <Text style={styles.getDirectionBtnText}>View on Map</Text>
+                onPress={() => getDirectionHandler()}>
+                <Text style={styles.getDirectionBtnText}>Get Direction</Text>
               </TouchableOpacity>
-            )}
+            </View>
           </View>
         </ScrollView>
       </ImageBackground>
@@ -355,6 +352,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F48423',
     marginTop: '8%',
     borderRadius: 12,
+    marginLeft: 8,
   },
   getDirectionBtnText: {
     color: 'white',
@@ -382,6 +380,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'gray',
     fontSize: 18,
+  },
+  controlBtnView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 

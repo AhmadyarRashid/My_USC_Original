@@ -282,20 +282,21 @@ function FilterStoreScreen() {
                 </Text>
               </View>
             )}
+            <View style={styles.controlBtnView}>
+              {stores.length > 0 && (
+                <TouchableOpacity
+                  style={styles.getDirectionBtn}
+                  onPress={goToViewOnMap}>
+                  <Text style={styles.getDirectionBtnText}>View on Map</Text>
+                </TouchableOpacity>
+              )}
 
-            <TouchableOpacity
-              style={styles.getDirectionBtn}
-              onPress={() => getDirectionHandler()}>
-              <Text style={styles.getDirectionBtnText}>Get Direction</Text>
-            </TouchableOpacity>
-
-            {stores.length > 0 && (
               <TouchableOpacity
                 style={styles.getDirectionBtn}
-                onPress={goToViewOnMap}>
-                <Text style={styles.getDirectionBtnText}>View on Map</Text>
+                onPress={() => getDirectionHandler()}>
+                <Text style={styles.getDirectionBtnText}>Get Direction</Text>
               </TouchableOpacity>
-            )}
+            </View>
           </View>
         </ScrollView>
       </ImageBackground>
@@ -355,6 +356,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F48423',
     marginTop: '8%',
     borderRadius: 12,
+    marginLeft: 8,
   },
   getDirectionBtnText: {
     color: 'white',
@@ -382,6 +384,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'gray',
     fontSize: 18,
+  },
+  controlBtnView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
