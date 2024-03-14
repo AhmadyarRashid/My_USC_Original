@@ -199,6 +199,12 @@ function FilterStoreScreen() {
     }
   }, [getSelectedStore]);
 
+  const goToViewOnMap = useCallback(() => {
+    navigation.navigate(`ViewOnMap`, {
+      stores,
+    });
+  }, [navigation, stores]);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ImageBackground
@@ -268,7 +274,9 @@ function FilterStoreScreen() {
                   </Text>
                 )}
                 <Text style={styles.storeDetailInfo}>
-                  <Text style={styles.storeDetailTitle}>Store Information:</Text>
+                  <Text style={styles.storeDetailTitle}>
+                    Store Information:
+                  </Text>
                   {'\n'}
                   {getSelectedStore?.name ?? ''}, {getSelectedStore?.address}
                 </Text>
@@ -280,6 +288,14 @@ function FilterStoreScreen() {
               onPress={() => getDirectionHandler()}>
               <Text style={styles.getDirectionBtnText}>Get Direction</Text>
             </TouchableOpacity>
+
+            {stores.length > 0 && (
+              <TouchableOpacity
+                style={styles.getDirectionBtn}
+                onPress={goToViewOnMap}>
+                <Text style={styles.getDirectionBtnText}>View on Map</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </ScrollView>
       </ImageBackground>
