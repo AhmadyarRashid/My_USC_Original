@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator();
 function Navigation() {
   return (
     <Stack.Navigator
-      initialRouteName="filter-stores"
+      initialRouteName="splash"
       screenOptions={{
         headerShown: false,
       }}>
