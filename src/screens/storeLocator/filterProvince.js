@@ -29,20 +29,22 @@ function FilterProvinceStoreScreen() {
   const [zones, setZones] = useState([]);
   const [regions, setRegions] = useState([]);
   const [stores, setStores] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const [localZoneId, setLocalZoneId] = useState(null);
   const [localRegionId, setLocalRegionId] = useState(null);
   const [localStoreId, setLocalStoreId] = useState(null);
-  const [localCategory, setLocalCategory] = useState(categoryList.all);
+  const [localCategory, setLocalCategory] = useState('all');
 
   const [zoneLoading, setZoneLoading] = useState(false);
   const [regionLoading, setRegionLoading] = useState(false);
   const [storeLoading, setStoreLoading] = useState(false);
+  const [categoryLoading, setCategoryLoading] = useState(false);
 
   const getUserZones = useCallback(() => {
     setZoneLoading(true);
     axios
-      .get(`${serverUrl}/usc/list/province`)
+      .get(`${serverUrl}/myusc/provinces`)
       .then(response => {
         setZoneLoading(false);
         const res = response.data;
@@ -64,12 +66,35 @@ function FilterProvinceStoreScreen() {
         //   placement: "bottom",
         // });
       });
+    axios
+      .get(`${serverUrl}/myusc/stores/category`)
+      .then(response => {
+        setCategoryLoading(false);
+        const res = response.data;
+        const {isSuccess, payload, message} = res;
+        if (isSuccess) {
+          setCategories(payload);
+        } else {
+          // toast.show({
+          //   title: message || "Oops, Something went wrong.",
+          //   placement: "bottom",
+          // });
+        }
+      })
+      .catch(error => {
+        setCategoryLoading(false);
+        console.log('get zone error ===', error);
+        // toast.show({
+        //   title: "Oops, Something went wrong. Please try again later.",
+        //   placement: "bottom",
+        // });
+      });
   }, []);
 
   const getUserRegions = useCallback(() => {
     setRegionLoading(true);
     axios
-      .get(`${serverUrl}/usc/province/districts?id=${localZoneId}`)
+      .get(`${serverUrl}/myusc/province/districts?id=${localZoneId}`)
       .then(response => {
         setRegionLoading(false);
         const res = response.data;
@@ -95,7 +120,7 @@ function FilterProvinceStoreScreen() {
 
   const getUserStores = useCallback(() => {
     setStoreLoading(true);
-    let url = `${serverUrl}/usc/dist/stores?district_id=${localRegionId}`;
+    let url = `${serverUrl}/myusc/district/stores?district_id=${localRegionId}&category=${localCategory}`;
 
     axios
       .get(url)
@@ -106,6 +131,7 @@ function FilterProvinceStoreScreen() {
         if (isSuccess) {
           setStores(payload);
         } else {
+          setStores([]);
           // toast.show({
           //   title: message || 'Oops, Something went wrong.',
           //   placement: 'bottom',
@@ -120,7 +146,7 @@ function FilterProvinceStoreScreen() {
         //   placement: 'bottom',
         // });
       });
-  }, [localRegionId]);
+  }, [localCategory, localRegionId]);
 
   useEffect(() => {
     getUserZones();
@@ -155,27 +181,34 @@ function FilterProvinceStoreScreen() {
     [stores],
   );
 
-  const getStores = useMemo(() => {
-    if (categoryList.regular === localCategory) {
-      return (
-        stores?.filter(
-          item =>
-            item?.category !== 'mobile store' ||
-            item?.category !== 'sale_point',
-        ) ?? []
-      );
-    } else if (categoryList.mobile === localCategory) {
-      return (
-        stores?.filter(
-          item =>
-            item?.category === 'mobile store' ||
-            item?.category === 'sale_point',
-        ) ?? []
-      );
-    } else {
-      return stores || [];
-    }
-  }, [localCategory, stores]);
+  const onChangeCategory = useCallback(
+    value => {
+      setLocalCategory(categories.find(item => item.name === value)?.id);
+    },
+    [categories],
+  );
+
+  // const getStores = useMemo(() => {
+  //   if (categoryList.regular === localCategory) {
+  //     return (
+  //       stores?.filter(
+  //         item =>
+  //           item?.category !== 'mobile store' ||
+  //           item?.category !== 'sale_point',
+  //       ) ?? []
+  //     );
+  //   } else if (categoryList.mobile === localCategory) {
+  //     return (
+  //       stores?.filter(
+  //         item =>
+  //           item?.category === 'mobile store' ||
+  //           item?.category === 'sale_point',
+  //       ) ?? []
+  //     );
+  //   } else {
+  //     return stores || [];
+  //   }
+  // }, [localCategory, stores]);
 
   const getSelectedStore = useMemo(
     () => stores?.find(item => item.id === localStoreId),
@@ -237,14 +270,15 @@ function FilterProvinceStoreScreen() {
               onSelect={onChangeRegion}
             />
             <Dropdown
+              isLoading={categoryLoading}
               defaultButtonText="Select Category | قسم منتخب کریں"
-              data={Object.values(categoryList)}
-              onSelect={selVal => setLocalCategory(selVal)}
+              data={categories?.map(item => item?.name)}
+              onSelect={onChangeCategory}
             />
             <Dropdown
               isLoading={storeLoading}
               defaultButtonText="Select Store | اسٹور کو منتخب کریں"
-              data={getStores?.map(item => item?.name ?? '')}
+              data={stores?.map(item => item?.name ?? '')}
               onSelect={onChangeStore}
             />
             {getSelectedStore && (
